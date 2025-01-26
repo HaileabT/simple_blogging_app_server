@@ -4,6 +4,7 @@ import { BlogByIdRequest } from "../types/blog/BlogRequest";
 import { AppError } from "../../shared/datastructures/AppError";
 import { blogRepository } from "../../database/repositories/blog.repository";
 import { BlogI } from "../../Entites/Iblog";
+import { SearchRepository } from "../../database/repositories/search.repository";
 
 export const findBlog = async (req: Request, res: Response) => {
   const blogRepo = blogRepository.getRepository();
@@ -42,4 +43,12 @@ export const deleteBlog = (req: BlogByIdRequest, res: Response) => {
   const deleteBlog = blogRepo.delete(blogId);
 
   APITerminal.respondWithSuccess<string>(res, "blog deleted", 200);
+};
+
+export const searchBlog = async (req: Request, res: Response) => {
+  const { title } = req.body;
+  const blogRepo = SearchRepository.getRepository();
+  const response = await blogRepo.searchByTitle(title);
+
+  APITerminal.respondWithSuccess<BlogI[]>(res, response, 200);
 };
