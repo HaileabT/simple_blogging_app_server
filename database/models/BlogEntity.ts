@@ -18,7 +18,7 @@ export class Blog {
   body!: string;
 
   @ManyToOne(() => User, (user) => user.blog)
-  user?: User;
+  user!: User;
 
   @CreateDateColumn()
   Date!: Date;

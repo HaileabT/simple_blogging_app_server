@@ -9,6 +9,9 @@ export class User {
   @Column({ unique: true })
   name!: string;
 
+  @Column({ select: true })
+  password!: string;
+
   @OneToMany(() => Blog, (blog) => blog.user)
   blog?: Blog[];
 }
