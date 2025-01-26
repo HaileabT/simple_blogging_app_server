@@ -3,5 +3,6 @@ export interface BlogI {
   id: string;
   title: string;
   body: string;
-  user: UserI;
+  user?: UserI;
+  Date: Date;
 }

@@ -21,5 +21,5 @@ export class Blog {
   user?: User;
 
   @CreateDateColumn()
-  Date?: Date;
+  Date!: Date;
 }
