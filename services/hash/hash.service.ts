@@ -1,5 +1,6 @@
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { AppError } from "../../shared/datastructures/AppError";
+
 export class HashingServiceProvider {
   static hashService: HashingServiceProvider | null = null;
 
@@ -20,7 +21,6 @@ export class HashingServiceProvider {
 
   async verify(word: string, hashedWord: string) {
     const com = await bcrypt.compare(word, hashedWord);
-    console.log(com);
 
     return com;
   }
