@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { APITerminal } from "../utility/APITerminal";
-import { BlogByIdRequest } from "../types/BlogRequest";
-import { AppError } from "../utility/AppError";
+import { BlogByIdRequest } from "../types/blog/BlogRequest";
+import { AppError } from "../../shared/datastructures/AppError";
 
 export const findBlog = (req: Request, res: Response) => {
   APITerminal.respondWithSuccess<string>(res, "hello", 200);

@@ -6,8 +6,11 @@ export class User {
   @PrimaryGeneratedColumn("uuid")
   id!: string;
 
-  @Column()
-  name?: string;
+  @Column({ unique: true })
+  name!: string;
+
+  @Column({ select: true })
+  password!: string;
 
   @OneToMany(() => Blog, (blog) => blog.user)
   blog?: Blog[];

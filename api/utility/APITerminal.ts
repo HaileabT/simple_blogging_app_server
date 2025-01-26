@@ -1,8 +1,8 @@
 import { Response } from "express";
-import { ServerSuccessResponse } from "../types/ServerSucessResponse";
-import { ServerErrorResponse } from "../types/ServerErrorResponse";
-import { AppError } from "./AppError";
-import { AppErrorCodes } from "../types/ErrorResponseData";
+import { ServerSuccessResponse } from "../types/app/ServerSucessResponse";
+import { ServerErrorResponse } from "../types/app/ServerErrorResponse";
+import { AppError } from "../../shared/datastructures/AppError";
+import { AppErrorCodes } from "../types/app/ErrorResponseData";
 
 export class APITerminal {
   static respondWithSuccess<T>(res: Response, data: T, statusCode: number) {
