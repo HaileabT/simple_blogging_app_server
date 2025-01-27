@@ -39,12 +39,15 @@ export class AuthServiceProvider {
 
       const now = Date.now();
 
-      if (now > expDate) throw new AppError(400, "Session Expired.");
+      console.log(now, expDate * 1000);
+
+      if (now > expDate * 1000) throw new AppError(400, "Session Expired.");
 
       if (!verification.id) throw new AppError(500, "Something went wrong.");
 
       return verification.id;
     } catch (err: any) {
+      console.log(err);
       throw new AppError(403, "Authentication Failed.");
     }
   }
