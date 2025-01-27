@@ -4,8 +4,9 @@ import { LoginRequest } from "../types/user/UserRequest";
 import { AppError } from "../../shared/datastructures/AppError";
 import { UserRepository } from "../../database/repositories/user.repository";
 import { AuthServiceProvider } from "../../services/auth/auth.service";
-import { LoginResponseData } from "../types/user/UserResponse";
 import { HashingServiceProvider } from "../../services/hash/hash.service";
+import { AuthPayload } from "../types/auth/AuthProviderPayload";
+import { AuthenticUserAttachedRequest, RequestCookie } from "../types/app/RequestCookie";
 
 export const login = async (req: LoginRequest, res: Response) => {
   const { name, password } = req.body;
@@ -25,14 +26,35 @@ export const login = async (req: LoginRequest, res: Response) => {
 
   const authData = AuthServiceProvider.getProvider().signAuthentication(user.id);
 
-  APITerminal.respondWithSuccess<LoginResponseData>(
+  res.cookie("auth-token", authData.token, {
+    httpOnly: true,
+    secure: false,
+    maxAge: 3600 * 1000 * 24 * 30, // a month
+  });
+
+  APITerminal.respondWithSuccess<AuthPayload>(
     res,
     {
-      token: authData.token,
-      user: {
-        name: user.name,
-        id: user.id,
-      },
+      name: user.name,
+      id: user.id,
+    },
+    200
+  );
+};
+
+export const logout = async (req: AuthenticUserAttachedRequest, res: Response) => {
+  if (!req.user) throw new AppError(402, "User not recognized.");
+
+  res.clearCookie("auth-token", {
+    httpOnly: true,
+    secure: false,
+    maxAge: 3600 * 1000 * 24 * 30, // a month
+  });
+
+  APITerminal.respondWithSuccess<{ loggedout: boolean }>(
+    res,
+    {
+      loggedout: true,
     },
     200
   );
