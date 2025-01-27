@@ -1,10 +1,10 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { APITerminal } from "./APITerminal";
 
 export const catchControllerError = (fn: Function) => {
-  return async (req: Request, res: Response) => {
+  return async (req: Request, res: Response, next?: NextFunction) => {
     try {
-      await fn(req, res);
+      await fn(req, res, next);
     } catch (err: any) {
       APITerminal.respondWithError(
         res,
