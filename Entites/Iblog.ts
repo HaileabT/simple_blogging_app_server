@@ -4,4 +4,5 @@ export interface BlogI {
   title: string;
   body: string;
   user: UserI;
+  Date: Date;
 }

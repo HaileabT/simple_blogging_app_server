@@ -27,7 +27,11 @@ export const signup = async (req: SignupRequest, res: Response) => {
 
   const checkUser = await userRepo.findByName(name);
 
-  if (checkUser) throw new AppError(400, "Another user has already registerd with that name.");
+  if (checkUser)
+    throw new AppError(
+      400,
+      "Another user has already registerd with that name."
+    );
 
   const user = await userRepo.create(name, password);
 
