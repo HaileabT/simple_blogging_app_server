@@ -3,7 +3,6 @@ import { APITerminal } from "../utility/APITerminal";
 import { AppError } from "../../shared/datastructures/AppError";
 import { SignupRequest, UserByIdRequest } from "../types/user/UserRequest";
 import { UserRepository } from "../../database/repositories/user.repository";
-import { UserI } from "../../Entites/Iuser";
 import { AuthPayload } from "../types/auth/AuthProviderPayload";
 
 export const findUser = (req: Request, res: Response) => {

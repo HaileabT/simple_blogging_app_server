@@ -1,9 +1,9 @@
-import { expressApp } from "./api/express";
+import { api } from "./api/api";
 import { initDatabase } from "./database/typeorm";
 import { ENV } from "./shared/utils/env";
 
 initDatabase();
 
-expressApp.listen(ENV.port, () => {
+api.listen(ENV.port, () => {
   console.log("Server is listening on port " + ENV.port);
 });

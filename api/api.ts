@@ -10,4 +10,4 @@ app.use(json());
 // API Router
 app.use("/api/v1", apiRouter);
 
-export { app as expressApp };
+export { app as api };
