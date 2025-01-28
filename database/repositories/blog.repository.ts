@@ -1,7 +1,7 @@
 import { BlogI } from "../../Entites/Iblog";
-import { AppError } from "../../shared/datastructures/AppError";
 import { appDataSource } from "../datasource";
 import { Blog } from "../models/BlogEntity";
+import { User } from "../models/UserEntity";
 
 export class blogRepository {
   static blogRepo = appDataSource.getRepository(Blog);
@@ -17,14 +17,15 @@ export class blogRepository {
     return blogRepository.repo;
   }
   async find(): Promise<BlogI[]> {
-    const blogs = await blogRepository.blogRepo.find();
+    const blogs = await blogRepository.blogRepo.find({ relations: ["user"] });
     return blogs;
   }
 
-  async create(title: string, body: string): Promise<Blog> {
+  async create(title: string, body: string, user: User): Promise<Blog> {
     const newBlog = new Blog();
     newBlog.title = title;
     newBlog.body = body;
+    newBlog.user = user;
     const blog = await blogRepository.blogRepo.save(newBlog);
     return blog;
   }

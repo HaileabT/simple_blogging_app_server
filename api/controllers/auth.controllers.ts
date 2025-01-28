@@ -48,7 +48,6 @@ export const logout = async (req: AuthenticUserAttachedRequest, res: Response) =
   res.clearCookie("auth-token", {
     httpOnly: true,
     secure: false,
-    maxAge: 3600 * 1000 * 24 * 30, // a month
   });
 
   APITerminal.respondWithSuccess<{ loggedout: boolean }>(

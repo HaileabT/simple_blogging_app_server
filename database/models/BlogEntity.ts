@@ -1,10 +1,4 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToOne,
-  CreateDateColumn,
-} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, JoinColumn } from "typeorm";
 import { User } from "./UserEntity";
 @Entity()
 export class Blog {
@@ -18,6 +12,10 @@ export class Blog {
   body!: string;
 
   @ManyToOne(() => User, (user) => user.blog)
+  @JoinColumn({
+    name: "user_id",
+    referencedColumnName: "id",
+  })
   user!: User;
 
   @CreateDateColumn()

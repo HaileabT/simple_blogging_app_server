@@ -5,3 +5,10 @@ export interface BlogByIdRequest extends Request {
     id: string;
   };
 }
+
+export interface CreateBlogRequest extends Request {
+  body: {
+    title: string;
+    body: string;
+  };
+}
