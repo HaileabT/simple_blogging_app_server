@@ -7,7 +7,7 @@ const app: Express = express();
 // Middlewares
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:3030"],
+    origin: [process.env.LOCAL_FRONTEND_SERVER"],
     credentials: true,
     methods: ["GET", "POST", "PATCH", "DELETE"],
   })
